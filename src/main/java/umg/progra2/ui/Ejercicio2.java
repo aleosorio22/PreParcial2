@@ -37,7 +37,7 @@ public class Ejercicio2 extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Inicializar el modelo de la tabla
-        String[] columnNames = {"ID", "Carne", "Nombre", "Correo", "Sección", "Telegram ID", "Estado"};
+        String[] columnNames = {"ID", "Nombre", "Correo", "Sección", "Telegram ID", "Estado"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnNames);
         tableUsuarios.setModel(model);  // Asignar el modelo a la tabla
@@ -62,7 +62,7 @@ public class Ejercicio2 extends JFrame{
 
                     JOptionPane.showMessageDialog(null, "Usuario agregado exitosamente");
                 }catch(Exception ex){
-                    JOptionPane.showMessageDialog(null, "Error al agregar usuario");
+                    JOptionPane.showMessageDialog(null, "Error al agregar usuario" + ex.getMessage());
                 }
             }
         });

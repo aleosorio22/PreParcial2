@@ -9,22 +9,22 @@ import java.util.List;
 
 public class UsuariosDao {
 
-    public void insertarUsuario(Usuario usuario) throws SQLException {
-        if (!correoDuplicado(usuario.getCorreo())) {
-            Connection connection = Conexion.getConnection();
-            String sql = "INSERT INTO tb_usuarios (carne, nombre, correo, seccion, telegramid, activo) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, usuario.getCarne());
-            ps.setString(2, usuario.getNombre());
-            ps.setString(3, usuario.getCorreo());
-            ps.setString(4, usuario.getSeccion());
-            ps.setLong(5, usuario.getTelegramId());
-            ps.setString(6, usuario.getActivo());
-            ps.executeUpdate();
-            ps.close();
-        } else {
-            System.out.println("Correo ya registrado");
+    public void insertarUsuario(Usuario usuario) throws SQLException, Exception {
+        if (correoDuplicado(usuario.getCorreo())) {
+            throw new Exception("Correo ya registrado");
         }
+
+        Connection connection = Conexion.getConnection();
+        String sql = "INSERT INTO tb_usuarios (carne, nombre, correo, seccion, telegramid, activo) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, usuario.getCarne());
+        ps.setString(2, usuario.getNombre());
+        ps.setString(3, usuario.getCorreo());
+        ps.setString(4, usuario.getSeccion());
+        ps.setLong(5, usuario.getTelegramId());
+        ps.setString(6, usuario.getActivo());
+        ps.executeUpdate();
+        ps.close();
     }
 
     private boolean correoDuplicado(String correo) throws SQLException {

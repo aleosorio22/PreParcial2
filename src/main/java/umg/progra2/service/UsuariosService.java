@@ -9,9 +9,10 @@ import java.util.List;
 public class UsuariosService {
     private UsuariosDao usuariosDao = new UsuariosDao();
 
-    public void agregarUsuario(Usuario usuario) throws SQLException {
+    public void agregarUsuario(Usuario usuario) throws SQLException, Exception {
         usuariosDao.insertarUsuario(usuario);
     }
+
 
     public List<Usuario> obtenerUsuarios() throws SQLException {
         return usuariosDao.obtenerTodos();

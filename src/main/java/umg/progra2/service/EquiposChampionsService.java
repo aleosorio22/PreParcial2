@@ -24,4 +24,8 @@ public class EquiposChampionsService {
     public void eliminarEquipo(int idEquipo) throws SQLException {
         equiposDao.eliminarEquipo(idEquipo);
     }
+
+    public EquipoChampions obtenerEquipoPorId(int idEquipo) throws SQLException {
+        return equiposDao.obtenerPorId(idEquipo);
+    }
 }

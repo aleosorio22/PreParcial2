@@ -84,4 +84,33 @@ public class EquiposChampionsDao {
         ps.executeUpdate();
         ps.close();
     }
+
+    public EquipoChampions obtenerPorId(int idEquipo) throws SQLException {
+        Connection connection = Conexion.getConnection();
+        String sql = "SELECT * FROM equipos_champions WHERE id_equipo = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, idEquipo);
+        ResultSet rs = ps.executeQuery();
+
+        EquipoChampions equipo = null;
+        if (rs.next()) {
+            equipo = new EquipoChampions(
+                    rs.getInt("id_equipo"),
+                    rs.getString("nombre"),
+                    rs.getString("pais"),
+                    rs.getString("ciudad"),
+                    rs.getString("estadio"),
+                    rs.getInt("fundacion"),
+                    rs.getString("entrenador"),
+                    rs.getString("web_oficial"),
+                    rs.getString("facebook"),
+                    rs.getString("twitter"),
+                    rs.getString("instagram"),
+                    rs.getString("patrocinador_principal")
+            );
+        }
+        rs.close();
+        ps.close();
+        return equipo;
+    }
 }
